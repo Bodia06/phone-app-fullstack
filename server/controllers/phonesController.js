@@ -102,9 +102,7 @@ module.exports.getAllPhonesByYear = async (req, res, next) => {
     });
 
     if (!foundPhones || foundPhones.length === 0) {
-      return next(createError(404, `No phones found for year ${year}`
-        
-      ));
+      return next(createError(404, `No phones found for year ${year}`));
     }
 
     res.status(200).send({ data: foundPhones });
@@ -271,6 +269,31 @@ module.exports.getPreordersPhonesByPnonesId = async (req, res, next) => {
       return next(createError(404, `No preorders found for phone id ${id}`));
     }
     res.status(200).send({ data: preordersFoundPhone });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports.updatePhoneImages = async (req, res, next) => {
+  const { filename } = req.file;
+  const { id } = req.params;
+
+  try {
+    const [updatedPhoneCount, updatedPhone] = await Phones.update(
+      { image: filename },
+      {
+        where: { id: id },
+        raw: true,
+        returning: true,
+      }
+    );
+
+    if (updatedPhoneCount === 0) {
+      return next(createError(404, `Phone with id ${id} not found`));
+    }
+
+    const phoneData = _.omit(updatedPhone, ['createdAt', 'updatedAt']);
+    res.status(200).send({ data: phoneData });
   } catch (err) {
     next(err);
   }
