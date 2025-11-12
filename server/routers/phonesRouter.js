@@ -1,21 +1,42 @@
 const { Router } = require('express');
+const { paginates } = require('../middleware');
+const { phonesControllers } = require('../controllers');
 
 const phonesRouter = Router();
 
-phonesRouter.route('/').get().post();
+phonesRouter
+  .route('/')
+  .get(paginates.paginatePhones, phonesControllers.getPhones)
+  .post(phonesControllers.createPhone);
 
-phonesRouter.route('/:id').patch().delete();
+phonesRouter
+  .route('/:id')
+  .patch(phonesControllers.updatePhone)
+  .delete(phonesControllers.deletePhone);
 
-phonesRouter.route('/year/:year').get().patch().delete();
+phonesRouter
+  .route('/year/:year')
+  .get(phonesControllers.getAllPhonesByYear)
+  .patch(phonesControllers.updateAllPhonesQuelityYear)
+  .delete(phonesControllers.deleteAllPhonesByYear);
 
-phonesRouter.get('/more-year/:moreYear');
+phonesRouter.get(
+  '/more-year/:moreYear',
+  phonesControllers.getAllPhonesMoreThanYear
+);
 
-phonesRouter.get('/avg-ram');
+phonesRouter.get('/avg-ram', phonesControllers.avgRamAllPhones);
 
-phonesRouter.get('/count-by-brand');
+phonesRouter.get('/count-by-brand', phonesControllers.countPhonesByBrands);
 
-phonesRouter.get('/brand-by-screen/:screenSize');
+phonesRouter.get(
+  '/brand-by-screen/:screenSize',
+  phonesControllers.brandByMaxScreenSize
+);
 
-phonesRouter.get('/:id/preorders');
+phonesRouter.get(
+  '/:id/preorders',
+  phonesControllers.getPreordersPhonesByPnonesId
+);
 
 module.exports = phonesRouter;
