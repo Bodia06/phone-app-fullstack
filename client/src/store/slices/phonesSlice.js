@@ -1,0 +1,45 @@
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import * as API from '../../api';
+
+const PHONES_SLICE_NAME = 'phones';
+
+const initialState = {
+  phones: [],
+  isFetching: false,
+  error: null,
+};
+
+export const getPhonesThunc = createAsyncThunk(
+  `${PHONES_SLICE_NAME}/get/phones`,
+  async (payload, { rejectWithValue }) => {
+    try {
+      const {
+        data: { data },
+      } = await API.getPhones();
+
+      return data;
+    } catch (err) {
+      return rejectWithValue({ errors: err.response.data });
+    }
+  }
+);
+
+const phoneSlices = createSlice({
+  name: PHONES_SLICE_NAME,
+  initialState,
+  extraReducers: builder => {
+    builder.addCase(getPhonesThunc.pending, state => {
+      (state.isFetching = true), (state.error = null);
+    });
+    builder.addCase(getPhonesThunc.fulfilled, (state, { payload }) => {
+      (state.phones = [...payload]), (state.isFetching = false);
+    });
+    builder.addCase(getPhonesThunc.rejected, (state, { payload }) => {
+      (state.isFetching = false), (state.error = payload);
+    });
+  },
+});
+
+const { reducer } = phoneSlices;
+
+export default reducer;

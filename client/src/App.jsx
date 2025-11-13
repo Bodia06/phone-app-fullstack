@@ -1,7 +1,8 @@
 import './App.css';
+import PhonesPage from './pages/phonesPage';
 
 function App() {
-  return;
+  return <PhonesPage />;
 }
 
 export default App;

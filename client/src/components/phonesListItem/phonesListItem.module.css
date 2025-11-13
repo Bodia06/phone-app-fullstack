@@ -1,0 +1,40 @@
+.PhoneCard {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(150, 170, 180, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.PhoneCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(150, 170, 180, 0.3);
+}
+
+.PhoneImageWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.PhoneImageWrapper img {
+  width: 100px;
+  height: auto;
+  border-radius: 12px;
+  background-color: #f0f4f8;
+  padding: 6px;
+}
+
+.PhoneInfo h2 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.PhoneInfo p {
+  margin: 2px 0;
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+}

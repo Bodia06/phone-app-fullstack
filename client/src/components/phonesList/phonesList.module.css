@@ -1,0 +1,46 @@
+.PhonesListWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f6f9ff 0%, #fef6ff 100%);
+  animation: fadeIn 1.2s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.PhonesListError {
+  color: #c0392b;
+  background-color: #fdecea;
+  border: 1px solid #f5c6cb;
+  padding: 12px 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.PhonesListLoading {
+  font-size: 18px;
+  color: #666;
+  margin-top: 20px;
+  animation: fadeIn 0.8s ease-in;
+}
+
+.PhonesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 20px;
+}

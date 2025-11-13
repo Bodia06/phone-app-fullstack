@@ -1,9 +1,12 @@
 const express = require('express');
 const router = require('./routers');
+const cors = require('cors');
 const { errorHandlers } = require('./middleware');
 const { STATIC_PATH } = require('./constants');
 
 const app = express();
+
+app.use(cors({ origin: '*' }));
 
 app.use(express.json());
 
