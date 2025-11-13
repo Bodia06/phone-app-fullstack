@@ -1,9 +1,13 @@
 import React from 'react';
 import styles from './phonesListItem.module.css';
 
-export default function PhonesListItem({ phone }) {
-  const { brand, hasNfc, image, model, processor, ram, screenSize, year } =
+export default function PhonesListItem({ phone, deletePhone }) {
+  const { id, brand, hasNfc, image, model, processor, ram, screenSize, year } =
     phone;
+
+  const handleDelete = (id) => {
+    deletePhone(id);
+  };
 
   return (
     <div className={styles.PhoneCard}>
@@ -19,6 +23,9 @@ export default function PhonesListItem({ phone }) {
         <p>RAM: {ram} GB</p>
         <p>Ekran: {screenSize} cali</p>
         <p>NFC: {hasNfc ? 'Tak' : 'Nie'}</p>
+      </div>
+      <div>
+        <button onClick={() => handleDelete(id)}>Delete</button>
       </div>
     </div>
   );

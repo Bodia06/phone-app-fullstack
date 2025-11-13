@@ -6,7 +6,7 @@ module.exports.dbErrorHandler = (err, req, res, next) => {
     const errors = err.errors.map(e => ({ status: 422, title: e.message }));
     return res.status(422).send(errors);
   }
-
+  console.log(err);
   if (err instanceof BaseError) {
     next(createHttpError(500, 'Database Error'));
   }

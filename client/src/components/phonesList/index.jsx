@@ -1,14 +1,18 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getPhonesThunc } from '../../store/slices/phonesSlice';
+import {
+  deletePhoneThunc,
+  getPhonesThunc,
+} from '../../store/slices/phonesSlice';
 import PhonesListItem from '../phonesListItem';
 import styles from './phonesList.module.css';
 
-function PhonesList({ getPets, isFetching, phones, error }) {
+function PhonesList({ getPhones, deletePhone, isFetching, phones, error }) {
   useEffect(() => {
-    getPets();
+    getPhones();
   }, []);
 
+  console.log(phones);
   return (
     <div className={styles.PhonesListWrapper}>
       {error && <div className={styles.PhonesListError}>{error}</div>}
@@ -18,7 +22,7 @@ function PhonesList({ getPets, isFetching, phones, error }) {
       {!error && !isFetching && (
         <div className={styles.PhonesList}>
           {phones.map((p) => (
-            <PhonesListItem key={p.id} phone={p} />
+            <PhonesListItem key={p.id} phone={p} deletePhone={deletePhone} />
           ))}
         </div>
       )}
@@ -29,7 +33,8 @@ function PhonesList({ getPets, isFetching, phones, error }) {
 const mapStateToProps = ({ phonesData }) => phonesData;
 
 const mapDispatchToProps = (dispatch) => ({
-  getPets: () => dispatch(getPhonesThunc()),
+  getPhones: () => dispatch(getPhonesThunc()),
+  deletePhone: (id) => dispatch(deletePhoneThunc(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PhonesList);

@@ -71,14 +71,13 @@ module.exports.deletePhone = async (req, res, next) => {
   try {
     const deletedPhoneCount = await Phones.destroy({
       where: { id },
-      returning: true,
     });
 
     if (deletedPhoneCount === 0) {
       return next(createError(404, `Phone with id ${id} not found`));
     }
 
-    res.status(204).end();
+    res.status(204).send(id);
   } catch (err) {
     next(err);
   }
