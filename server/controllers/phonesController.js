@@ -1,5 +1,5 @@
 const createError = require('http-errors');
-const path = require('node:path');
+const path = require('path');
 const { Op } = require('sequelize');
 const _ = require('lodash');
 const { Phones } = require('../database/models');

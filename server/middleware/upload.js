@@ -7,14 +7,15 @@ const storage = multer.diskStorage({
     cb(null, path.join(STATIC_PATH, 'images'));
   },
   filename: (req, file, cb) => {
-    cb(null, file.fieldname + '-' + Date.now());
+    const ext = path.extname(file.originalname);
+    cb(null, file.fieldname + '-' + Date.now() + ext);
   },
 });
 
 function fileFilter (req, file, cb) {
-  cb(null, /^image\/(png|jpg|jpeg|gif)$/.test(file.minetype));
+  cb(null, /^image\/(png|jpg|jpeg|gif)$/.test(file.mimetype));
 }
 
 const upload = multer({ storage, fileFilter });
 
-module.exports.uploadPhoneImages = upload.single('phoneImage');
+module.exports.uploadPhoneImages = upload.single('image');

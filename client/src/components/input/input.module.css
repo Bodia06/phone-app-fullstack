@@ -1,0 +1,43 @@
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.inputLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+}
+
+.textInput {
+  padding: 10px 12px;
+  border: 1px solid #cfcfcf;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: border-color 0.2s;
+}
+
+.textInput:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.radioInput {
+  cursor: pointer;
+}
+
+.inputError {
+  color: #e63946;
+  font-size: 13px;
+  margin-top: 4px;
+}

@@ -9,10 +9,12 @@ export default function PhonesListItem({ phone, deletePhone }) {
     deletePhone(id);
   };
 
+  console.log('image', image);
+
   return (
     <div className={styles.PhoneCard}>
       <div className={styles.PhoneImageWrapper}>
-        <img src={image} alt={`${brand} ${model}`} />
+        <img src={`http://localhost:5001/${image}`} alt={`${brand} ${model}`} />
       </div>
       <div className={styles.PhoneInfo}>
         <h2>

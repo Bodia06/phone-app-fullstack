@@ -7,7 +7,7 @@ const phonesRouter = Router();
 phonesRouter
   .route('/')
   .get(paginates.paginatePhones, phonesControllers.getPhones)
-  .post(phonesControllers.createPhone);
+  .post(upload.uploadPhoneImages, phonesControllers.createPhone);
 
 phonesRouter
   .route('/:id')

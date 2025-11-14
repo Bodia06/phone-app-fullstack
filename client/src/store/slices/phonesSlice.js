@@ -78,7 +78,8 @@ const phoneSlices = createSlice({
       state.isFetching = false;
     });
     builder.addCase(deletePhoneThunc.pending, state => {
-      (state.isFetching = true), (state.error = null);
+      state.isFetching = true;
+      state.error = null;
     });
     builder.addCase(deletePhoneThunc.fulfilled, (state, { payload }) => {
       state.isFetching = false;
