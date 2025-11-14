@@ -1,7 +1,9 @@
 const createError = require('http-errors');
+const path = require('node:path');
 const { Op } = require('sequelize');
 const _ = require('lodash');
-const { Preorders, Phones } = require('../database/models');
+const { Phones } = require('../database/models');
+const { STATIC_IMAGES_FOLDER } = require('../constants');
 
 module.exports.getPhones = async (req, res, next) => {
   const { limit, offset } = req.pagination || {};
@@ -26,7 +28,11 @@ module.exports.getPhones = async (req, res, next) => {
 };
 
 module.exports.createPhone = async (req, res, next) => {
-  const { body } = req;
+  const { body, file } = req;
+
+  if (file) {
+    body.image = path.join(STATIC_IMAGES_FOLDER, file.filename);
+  }
   try {
     const newPhone = await Phones.create(body);
 

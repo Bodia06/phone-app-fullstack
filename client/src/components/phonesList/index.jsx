@@ -12,7 +12,6 @@ function PhonesList({ getPhones, deletePhone, isFetching, phones, error }) {
     getPhones();
   }, []);
 
-  console.log(phones);
   return (
     <div className={styles.PhonesListWrapper}>
       {error && <div className={styles.PhonesListError}>{error}</div>}

@@ -1,13 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PhonesList from '../../components/phonesList';
+import styles from './phonesPage.module.css';
+import { connect } from 'react-redux';
+import { createPhoneThunc } from '../../store/slices/phonesSlice';
+import PhonesCreateFrom from '../phonesCreateFormPage';
 
-export default function PhonesPage() {
+function PhonesPage({ createPhone }) {
+  const [isOpening, setIsOpening] = useState(false);
+
+  const handleOpenForm = () => {
+    console.log(isOpening);
+    setIsOpening(!isOpening);
+  };
+
   return (
-    <>
-      <div>
-        <h1>Phones Information</h1>
+    <div className={styles.page}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>📱 Phones Information</h1>
+        <p className={styles.subtitle}>
+          Discover and manage all your devices in one elegant view.
+        </p>
+        <div className={styles.actions}>
+          <button className={styles.addButton} onClick={handleOpenForm}>
+            ➕ Add New Phone
+          </button>
+        </div>
       </div>
-      <PhonesList />
-    </>
+      {isOpening ? <PhonesCreateFrom createPhone={createPhone} /> : null}
+      <div className={styles.listContainer}>
+        <PhonesList />
+      </div>
+    </div>
   );
 }
+
+const mapStateToProps = (phonesData) => phonesData;
+
+const mapDispatchToProps = (dispatch) => ({
+  createPhone: (values) => dispatch(createPhoneThunc(values)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PhonesPage);
