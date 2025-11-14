@@ -83,9 +83,7 @@ const phoneSlices = createSlice({
     });
     builder.addCase(deletePhoneThunc.fulfilled, (state, { payload }) => {
       state.isFetching = false;
-      state.phones = state.phones.filter(
-        p => p.id.toString() !== payload.toString()
-      );
+      state.phones = state.phones.splice(payload, 1);
     });
     builder.addCase(deletePhoneThunc.rejected, (state, { payload }) => {
       (state.isFetching = false), (state.error = payload);

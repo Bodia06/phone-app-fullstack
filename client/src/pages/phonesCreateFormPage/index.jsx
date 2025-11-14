@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import PHONES_VALIDATION_SCHEMA from '../../utils/phonesValidationSchems';
-import Input from '../../components/Input';
+import Input from '../../components/input';
 import styles from './phonesCreateForm.module.css';
 
 export default function PhonesCreateForm({ createPhone }) {
@@ -12,7 +12,7 @@ export default function PhonesCreateForm({ createPhone }) {
     ram: '',
     processor: '',
     screenSize: '',
-    hasNfc: '',
+    hasNfc: 'yes',
     image: '',
   };
 
@@ -38,7 +38,7 @@ export default function PhonesCreateForm({ createPhone }) {
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        // validationSchema={PHONES_VALIDATION_SCHEMA}
+        validationSchema={PHONES_VALIDATION_SCHEMA}
       >
         {(formikProps) => (
           <Form className={styles.form}>
@@ -69,25 +69,15 @@ export default function PhonesCreateForm({ createPhone }) {
               placeholder="6.1"
             />
 
-            <div className={styles.radioGroup}>
-              <label className={styles.radioGroupLabel}>Has NFC</label>
-
-              <Input
-                label="Yes"
-                name="hasNfc"
-                type="radio"
-                value="yes"
-                formik={formikProps}
-              />
-
-              <Input
-                label="No"
-                name="hasNfc"
-                type="radio"
-                value="no"
-                formik={formikProps}
-              />
-            </div>
+            <Input
+              label="Has NFC"
+              name="hasNfc"
+              type="select"
+              options={[
+                { value: 'yes', label: 'Yes' },
+                { value: 'no', label: 'No' },
+              ]}
+            />
 
             <label className={styles.fileLabel}>
               <span>Photo:</span>

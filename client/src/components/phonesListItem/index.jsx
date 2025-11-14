@@ -1,20 +1,23 @@
 import React from 'react';
 import styles from './phonesListItem.module.css';
+import defaultImage from './../../images/defaultImagePhone.jpeg';
 
-export default function PhonesListItem({ phone, deletePhone }) {
+export default function PhonesListItem({ phone, deletePhone, refreshList }) {
   const { id, brand, hasNfc, image, model, processor, ram, screenSize, year } =
     phone;
 
   const handleDelete = (id) => {
     deletePhone(id);
+    refreshList();
   };
-
-  console.log('image', image);
 
   return (
     <div className={styles.PhoneCard}>
       <div className={styles.PhoneImageWrapper}>
-        <img src={`http://localhost:5001/${image}`} alt={`${brand} ${model}`} />
+        <img
+          src={image ? `http://localhost:5001/${image}` : defaultImage}
+          alt={`${brand} ${model}`}
+        />
       </div>
       <div className={styles.PhoneInfo}>
         <h2>

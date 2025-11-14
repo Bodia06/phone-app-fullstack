@@ -21,7 +21,12 @@ function PhonesList({ getPhones, deletePhone, isFetching, phones, error }) {
       {!error && !isFetching && (
         <div className={styles.PhonesList}>
           {phones.map((p) => (
-            <PhonesListItem key={p.id} phone={p} deletePhone={deletePhone} />
+            <PhonesListItem
+              key={p.id}
+              phone={p}
+              deletePhone={deletePhone}
+              refreshList={getPhones}
+            />
           ))}
         </div>
       )}
